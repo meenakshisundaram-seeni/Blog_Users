@@ -8,7 +8,7 @@ from flask_sqlalchemy import SQLAlchemy
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.orm import relationship
-
+import os
 # Import your forms from the forms.py
 from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 
@@ -51,7 +51,7 @@ gravatar = Gravatar(app,
                     base_url=None)
 
 # CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.db'
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("RENDER_DATABASE_URL")
 db = SQLAlchemy()
 db.init_app(app)
 
